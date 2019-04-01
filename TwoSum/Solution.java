@@ -11,6 +11,8 @@ Given nums = [2, 7, 11, 15], target = 9,
 
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
+ 注意，求的是index而不是该值的时候，
+ 查找两个数且求的是index的时候用该做法（map），如果只求数而不是下标，则可用先排序的做法（就用数组）。
  * @author ASUS-NB
  *
  */
@@ -20,7 +22,7 @@ public class Solution {
 		// TODO 自动生成的方法存根
 		Solution so = new Solution();
 		int a[] = {2,7,11,15};
-		int ans[] = so.twosum(a,9);
+		int ans[] = so.twosum(a,4);
 		if(ans!=null){
 			for(int i = 0;i<2;i++){
 				System.out.println(ans[i]);
@@ -32,12 +34,11 @@ public class Solution {
 		HashMap<Integer,Integer> map = new HashMap();
 		for(int i = 0;i<numbers.length;i++){
 			int b  = target - numbers[i];
-			Integer j = map.get(b);
-			if(j!=null){
+			if(map.containsKey(b)){
 				//以j开头是因为只用一个循环的时候，i每次代表的是当前这个数，也就是实际上的后一个数
-				return new int[]{j+1,i+1};
+				return new int[]{map.get(b)+1,i+1};
 			}
-            map.put(numbers[i],i);
+			map.put(numbers[i],i);
 		}
 		return null;
 	}
