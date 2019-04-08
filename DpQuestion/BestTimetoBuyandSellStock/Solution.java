@@ -14,7 +14,8 @@ package BestTimetoBuyandSellStock;
 import java.util.*;
 
 class Solution {
-    //使用Map出现很大的失误：map中不能有相同的key，但是本题当 input= [1,4,1,4,3,1]时出现问题，注意用map + sort 的时候一定要注意是否会出现相同的key这一问题
+    //使用Map出现很大的失误：map中不能有相同的key，但是本题当 input= [1,4,1,4,3,1]时出现问题，
+    // 注意用map + sort 的时候一定要注意是否会出现相同的key这一问题
     List<Bianhao> list = new ArrayList<>();
     public int maxProfit(int[] prices) {
         for (int i = 0; i < prices.length; i++) {

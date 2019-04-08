@@ -38,6 +38,7 @@ public class Solution {
 				//以j开头是因为只用一个循环的时候，i每次代表的是当前这个数，也就是实际上的后一个数
 				return new int[]{map.get(b)+1,i+1};
 			}
+			//处理完之后再将数据放进去，可以保证处理的时候不包含当前这个数据。
 			map.put(numbers[i],i);
 		}
 		return null;
