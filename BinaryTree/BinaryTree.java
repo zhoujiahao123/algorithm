@@ -16,6 +16,7 @@ public class BinaryTree {
     public BinaryTree(BinaryTree lChild, BinaryTree rChild, Object data) {
         this.rChild = rChild;
         this.lChild = lChild;
+        //just a test
         this.data = data;
     }
 

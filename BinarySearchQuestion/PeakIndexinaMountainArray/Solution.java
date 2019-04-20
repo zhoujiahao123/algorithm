@@ -6,7 +6,7 @@ class Solution {
         int end = A.length - 1;
         int mid = start;
         while (start <= end) {
-            mid = (start + (end - start))/2;
+            mid = start + (end - start)/2;
             if (A[mid] > A[mid - 1] && A[mid] > A[mid + 1]) {
                 return mid;
             } else if (A[mid] < A[mid - 1]) {
