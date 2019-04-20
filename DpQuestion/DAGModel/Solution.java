@@ -6,15 +6,15 @@ import java.util.Scanner;
 
 /**
  * 嵌套矩形问题。有n个矩形，每个矩形可以用两个整数a、b描述，表示它的长和宽。矩
- * 形X(a,b)可以嵌套在矩形Y(c, d)中，当且仅当a＜c，b＜d，或者b＜c，a＜d（相当于把矩
- * 形X旋转90°）。例如，(1, 5)可以嵌套在(6, 2)内，但不能嵌套在(3, 4)内。你的任务是选出尽
- * 量多的矩形排成一行，使得除了最后一个之外，每一个矩形都可以嵌套在下一个矩形内。如
- * 果有多解，矩形编号的字典序应尽量小。
+ *  * 形X(a,b)可以嵌套在矩形Y(c, d)中，当且仅当a＜c，b＜d，或者b＜c，a＜d（相当于把矩
+ *  * 形X旋转90°）。例如，(1, 5)可以嵌套在(6, 2)内，但不能嵌套在(3, 4)内。你的任务是选出尽
+ *  * 量多的矩形排成一行，使得除了最后一个之外，每一个矩形都可以嵌套在下一个矩形内。如
+ *  * 果有多解，矩形编号的字典序应尽量小。
  */
 public class Solution {
     Scanner input = new Scanner(System.in);
     //用来装矩形对象
-    List<Rectangle> list = new ArrayList<>();
+    List<DAGModel.Rectangle> list = new ArrayList<>();
     //数据对象矩形的个数
     int length = 0;
     //连接图
@@ -52,7 +52,7 @@ public class Solution {
                 x = y;
                 y = temp;
             }
-            list.add(new Rectangle(x, y));
+            list.add(new DAGModel.Rectangle(x, y));
         }
         G = new int[length][length];
         vis = new int[length];

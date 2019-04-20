@@ -14,7 +14,7 @@ class Solution {
     public int maxDepth(TreeNode root) {
         return findDeep(root);
     }
-
+//递归的思想又忘记了？
     public int findDeep(TreeNode treeNode) {
         if (treeNode == null) {
             return 0;

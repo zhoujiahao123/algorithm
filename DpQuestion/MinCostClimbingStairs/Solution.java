@@ -17,7 +17,7 @@ class Solution {
         //边界条件，递归的关键之一
         if (i == 0) return cost[0];
         if (i == 1) return cost[1];
-        //由题目决定
+        //由题目决定，若没有这句话，那下面的vis[i]会数组溢出
         if (i == cost.length) {
             return Math.min(solve(cost, i - 1), solve(cost, i - 2));
         }
@@ -25,9 +25,10 @@ class Solution {
             return ans[i];
         }
         vis[i] = 1;
-        if (i == cost.length) {
-            return Math.min(solve(cost, i - 1), solve(cost, i - 2));
-        }
+        //这段代码不应该有
+//        if (i == cost.length) {
+//            return Math.min(solve(cost, i - 1), solve(cost, i - 2));
+//        }
         return ans[i] = cost[i] + Math.min(solve(cost, i - 1), solve(cost, i - 2));
     }
 
@@ -38,6 +39,6 @@ class Solution {
         for (int i = 2; i < cost.length; i++) {
             ans[i] = Math.min(ans[i - 1], ans[i - 2]) + cost[i];
         }
-        return Math.min(ans[cost.length-1],ans[cost.length-2]);
+        return Math.min(ans[cost.length - 1], ans[cost.length - 2]);
     }
 }
