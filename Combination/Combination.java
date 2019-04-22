@@ -1,4 +1,4 @@
-package 研究生复试;
+package Combination;
 
 //4 A 2B 2C 1D 1E 3F 能组成多少种5个字母的字符串
 public class Combination {
