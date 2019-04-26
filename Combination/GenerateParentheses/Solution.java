@@ -10,7 +10,6 @@ import java.util.Stack;
 class Solution {
     List<String> list = new ArrayList<>();
     List<String> wrongList = new ArrayList<>();
-
     public static void main(String[] args) {
         Solution solution = new Solution();
         solution.generateParenthesis(5);
@@ -18,7 +17,6 @@ class Solution {
             System.out.println(solution.list.get(i));
         }
     }
-
     public List<String> generateParenthesis(int n) {
         String s = "";
         for (int i = 0; i < n; i++) {
@@ -33,29 +31,40 @@ class Solution {
 
     public void solve(int n, String s) {
         char ch[] = s.toCharArray();
+//        if (n == ch.length) {
+//            if (wrongList.contains(s) || list.contains(s)) {
+//                return;
+//            }
+//            Stack stack = new Stack();
+//            boolean flag = true;
+//            String ans = "";
+//            for (int i = 0; i < ch.length; i++) {
+//                ans += ch[i];
+//                if (ch[i] == '(') {
+//                    stack.push(ch[i]);
+//                } else {
+//                    if (!stack.empty()) {
+//                        stack.pop();
+//                    } else {
+//                        flag = false;
+//                    }
+//                }
+//            }
+//            if (flag) {
+//                list.add(ans);
+//            } else {
+//                wrongList.add(ans);
+//            }
+//        }
         if (n == ch.length) {
-            if (wrongList.contains(s) || list.contains(s)) {
-                return;
+            int balance = 0;
+            for (char c : ch) {
+                if(c == '(') balance++;
+                else balance--;
+                if(balance<0) return;
             }
-            Stack stack = new Stack();
-            boolean flag = true;
-            String ans = "";
-            for (int i = 0; i < ch.length; i++) {
-                ans += ch[i];
-                if (ch[i] == '(') {
-                    stack.push(ch[i]);
-                } else {
-                    if (!stack.empty()) {
-                        stack.pop();
-                    } else {
-                        flag = false;
-                    }
-                }
-            }
-            if (flag) {
-                list.add(ans);
-            } else {
-                wrongList.add(ans);
+            if(balance == 0&&!list.contains(s)){
+                list.add(new String(ch));
             }
         }
         for (int i = n; i < ch.length; i++) {
