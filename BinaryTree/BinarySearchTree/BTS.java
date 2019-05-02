@@ -41,11 +41,11 @@ public class BTS<Key extends Comparable<Key>, Value> {
                 return null;
             }
             int cmp = key.compareTo(x.key);
-            if(cmp == 0){
+            if (cmp == 0) {
                 return x.value;
-            }else if(cmp<0){
+            } else if (cmp < 0) {
                 return get(x.left, key);
-            }else{
+            } else {
                 return get(x.right, key);
             }
         }
@@ -61,11 +61,11 @@ public class BTS<Key extends Comparable<Key>, Value> {
                 return new Node(key, value, 1);
             }
             int cmp = key.compareTo(x.key);
-            if(cmp == 0){
+            if (cmp == 0) {
                 x.value = value;
-            }else if(cmp<0){
+            } else if (cmp < 0) {
                 x.left = put(x.left, key, value);
-            }else{
+            } else {
                 x.right = put(x.right, key, value);
             }
             x.N = size(x.left) + size(x.right) + 1;
@@ -82,19 +82,64 @@ public class BTS<Key extends Comparable<Key>, Value> {
         }
 
         public Key floor(Key key) {
-            Node x = floor(root,key);
-            if(x == null) return null;
+            Node x = floor(root, key);
+            if (x == null) return null;
             return x.key;
         }
 
         public Node floor(Node x, Key key) {
             if (x == null) return null;
             int cmp = key.compareTo(x.key);
-            if (cmp == 0) return x;
-            if (cmp < 0) return floor(x.left, key);
-            Node t = floor(x.right, key);
-            if (t != null) return t;
-            else return x;
+            if (cmp == 0) {
+                return x;
+            } else if (cmp < 0) {
+                return floor(x.left, key);
+            } else {
+                //当找到小于key的键，要判断其右子树是否存在小于等于key的键，若有则返回那个节点，没有则返回当前节点
+                Node t = floor(x.right, key);
+                if (t != null) return t;
+                else return x;
+            }
+        }
+
+        public Node select(Node x, int k) {
+            if (x == null) {
+                return null;
+            }
+            int t = size(x.left);
+            if (t > k) {
+                return select(x.left, k);
+            } else if (t < k) {
+                return select(x.right, k - t - 1);
+            } else {
+                return x;
+            }
+        }
+
+        public Node deleteMin(Node x) {
+            if (x.left == null) return x.right;
+            x.left = deleteMin(x.left);
+            x.N = size(x.left) + size(x.right) + 1;
+            return x;
+        }
+
+        public Node delete(Node x, Key key) {
+            if(x == null) return null;
+            int cmp = key.compareTo(x.key);
+            if(cmp<0){
+                x.left = delete(x.left,key);
+            }else if(cmp>0){
+                x.right = delete(x.right,key);
+            }else{
+                if(x.right == null) return x.left;
+                if(x.left == null) return x.right;
+                Node t = x;
+                x = min(t.right);
+                x.right = deleteMin(t.right);
+                x.left = t.left;
+            }
+            x.N = size(x.left) + size(x.right) +1;
+            return x;
         }
     }
 }
