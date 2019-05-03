@@ -1,5 +1,8 @@
 package 研究生复试;
 
+/**
+ * 即便是有序数组仍然要进行这么多次的递归。
+ */
 public class QuickSort {
 
 	public static int divide(int a[] , int start,int end){
@@ -20,12 +23,12 @@ public class QuickSort {
 				start++;
 			}
 		}
-		
+
 		return start;
 	}
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
-		int a[] = {7,8,9,5,4,6,2,3,1};
+		int a[] = {1,2,3,4,5,6,7,8,9};
 		sort(a,0,8);
 		for(int i = 0 ;i<a.length;i++){
 			System.out.print(a[i]+" ");

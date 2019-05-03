@@ -1,14 +1,23 @@
 package BinaryTree.BinarySearchTree;
 
+
+import sun.misc.Queue;
+
+import java.util.Arrays;
+
 public class BTS<Key extends Comparable<Key>, Value> {
     //二叉树根节点
-    private Node root;
+    public Node root;
 
-    private class Node {
+    public class Node {
         private Key key; //键
         private Value value;//值
         private Node left, right;//左节点和右节点
         private int N;//以该节点为根的子树中的节点总数
+
+        public Node() {
+
+        }
 
         //构造方法
         public Node(Key key, Value value, int N) {
@@ -17,6 +26,26 @@ public class BTS<Key extends Comparable<Key>, Value> {
             this.N = N;
         }
 
+    }
+
+        public int height() {
+            return height(root);
+        }
+        private int height(Node x) {
+            if (x == null) return 0;
+            return 1 + Math.max(height(x.left), height(x.right));
+        }
+        //线序遍历
+        public void preOrder(){
+            preOrder(root);
+        }
+        //线序遍历
+        private void preOrder(Node x){
+            if(x == null) return;
+            System.out.print(x.key);
+            preOrder(x.left);
+            preOrder(x.right);
+        }
         //以该节点为根的子树中的节点总数
         public int size() {
             return size(root);
@@ -35,7 +64,7 @@ public class BTS<Key extends Comparable<Key>, Value> {
             return get(root, key);
         }
 
-        public Value get(Node x, Key key) {
+        private Value get(Node x, Key key) {
             //如果树为空，则返回null
             if (x == null) {
                 return null;
@@ -56,7 +85,7 @@ public class BTS<Key extends Comparable<Key>, Value> {
             root = put(root, key, value);
         }
 
-        public Node put(Node x, Key key, Value value) {
+        private Node put(Node x, Key key, Value value) {
             if (x == null) {
                 return new Node(key, value, 1);
             }
@@ -87,7 +116,7 @@ public class BTS<Key extends Comparable<Key>, Value> {
             return x.key;
         }
 
-        public Node floor(Node x, Key key) {
+        private Node floor(Node x, Key key) {
             if (x == null) return null;
             int cmp = key.compareTo(x.key);
             if (cmp == 0) {
@@ -101,8 +130,10 @@ public class BTS<Key extends Comparable<Key>, Value> {
                 else return x;
             }
         }
-
-        public Node select(Node x, int k) {
+        public Key select(int k){
+            return select(root,k).key;
+        }
+        private Node select(Node x, int k) {
             if (x == null) {
                 return null;
             }
@@ -115,15 +146,21 @@ public class BTS<Key extends Comparable<Key>, Value> {
                 return x;
             }
         }
-
-        public Node deleteMin(Node x) {
+        public void deleteMin(){
+            root = deleteMin(root);
+        }
+        private Node deleteMin(Node x) {
             if (x.left == null) return x.right;
             x.left = deleteMin(x.left);
             x.N = size(x.left) + size(x.right) + 1;
             return x;
         }
 
-        public Node delete(Node x, Key key) {
+        public void delete(Key key){
+            root = delete(root,key);
+
+        }
+        private Node delete(Node x, Key key) {
             if(x == null) return null;
             int cmp = key.compareTo(x.key);
             if(cmp<0){
@@ -141,5 +178,27 @@ public class BTS<Key extends Comparable<Key>, Value> {
             x.N = size(x.left) + size(x.right) +1;
             return x;
         }
+        public Queue<Key> keys(Key lo,Key hi){
+            Queue<Key> queue = new Queue<Key>();
+            keys(root,queue,lo,hi);
+            return  queue;
+        }
+
+        private void keys(Node x, Queue<Key> queue,Key lo,Key hi){
+            if(x == null){
+                return ;
+            }
+            int cmplo = lo.compareTo(x.key);
+            int cmphi = hi.compareTo(x.key);
+            if(cmplo<0){
+                keys(x.left,queue,lo,hi);
+            }
+            if(cmplo<=0&&cmphi>=0){
+                queue.enqueue(x.key);
+            }
+            if(cmphi>0){
+                keys(x.right,queue,lo,hi);
+            }
+        }
     }
-}
+
