@@ -21,25 +21,60 @@ package BinaryTree.LowestCommonAncestorofaBinarySearchTree;
  * Output: 2
  * Explanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according to the LCA definition.
  */
+
+/**
+ * 能够解决，但运行速度太慢
+ */
 public class Solution {
-    TreeNode ansNode;
+    TreeNode ansNode = null;
+    //判断p，q结点是否在其左子树
+    boolean exist ;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(p.val>q.val){
+            TreeNode temp = q;
+            q = p;
+            p = temp;
+        }
         keys(root, p, q);
         return ansNode;
     }
     public void keys(TreeNode root, TreeNode p, TreeNode q){
-        if(root == null) return;
+        if(root == null||ansNode!=null) return;
         if(p.val<root.val){
-            root.left = lowestCommonAncestor(root.left,p,q);
+            lowestCommonAncestor(root.left,p,q);
         }
         if(p.val<=root.val&&q.val>=root.val){
-            if(root.left ==p||root.right ==q){
-                ansNode = root;
+            if(p.val == root.val){
+                exist = false;
+                inOrder(root.right,q);
+                if(exist) ansNode = root;
+            }else if(q.val == root.val){
+                exist = false;
+                inOrder(root.left,p);
+                if(exist) ansNode = root;
+            }else {
+                exist = false;
+                inOrder(root.left,p);
+                if(exist){
+                    exist = false;
+                    inOrder(root.right,q);
+                    if(exist)
+                        ansNode = root;
+                }
             }
         }
         if(q.val>root.val){
-            root.right = lowestCommonAncestor(root.right,p,q);
+            lowestCommonAncestor(root.right,p,q);
         }
+    }
+    //用遍历的方法判断左子树是否存在p结点，
+    public void inOrder(TreeNode root,TreeNode node){
+        if(root == null || exist) return;
+        inOrder(root.left,node);
+        if(root.val == node.val){
+            exist = true;
+        }
+        inOrder(root.right,node);
     }
     public class TreeNode {
         int val;
