@@ -1,21 +1,28 @@
 package 研究生复试;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Permutation {
 
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
-		int a[] = {1,2};
-		f(0,a);
+		Calendar c = Calendar.getInstance();
+		c.set(1997,11,30);
+		Date d = c.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+		String s = sdf.format(d);
+		System.out.println(s);
 	}
 	public static void f(int k ,int a[]){
-		if(k == a.length){
+		if(k == a.length-1){
 			for(int i = 0;i<a.length;i++)
 				System.out.print(a[i]);
 			System.out.println();
 			return ;
 		}
 		for(int i = k;i<a.length;i++){
-			//举一个简单的例子来理解，对于ABCD而言，当k = 0时，先取A，然后求f(1,a),即剩下的数据有多少种排列，然后循环一下取i = 1，把A和B换一下
-			//就变成取了B，然后算ACD有多少种排列了
 			int temp = a[k];
 			a[k] = a[i];
 			a[i] = temp;
