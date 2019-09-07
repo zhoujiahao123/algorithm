@@ -1,4 +1,4 @@
-package algorithm.Greedy;
+package algorithm.Greedy.express;
 
 import java.util.ArrayList;
 import java.util.Iterator;

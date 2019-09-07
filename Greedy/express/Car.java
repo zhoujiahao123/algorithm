@@ -1,6 +1,4 @@
-package algorithm.Greedy;
-
-import algorithm.Greedy.course.Things;
+package algorithm.Greedy.express;
 
 import java.util.ArrayList;
 import java.util.List;

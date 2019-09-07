@@ -1,11 +1,11 @@
-package algorithm.Greedy;
+package algorithm.Greedy.ActivityPlan;
 
-public class Foods {
+public class Activity {
     private String name;
     private int startTime;
     private int endTime;
 
-    public Foods(String name, int startTime, int endTime) {
+    public Activity(String name, int startTime, int endTime) {
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
