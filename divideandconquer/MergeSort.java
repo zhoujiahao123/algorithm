@@ -52,6 +52,10 @@ public class MergeSort {
                 temp[k++] = a[i++];
             else
                 temp[k++] = a[j++];
+
+
+
+
         }
         while (i <= m) {
             temp[k++] = a[i++];

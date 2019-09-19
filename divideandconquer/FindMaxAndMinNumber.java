@@ -9,7 +9,11 @@ public class FindMaxAndMinNumber {
 
     public static void main(String[] args) {
         FindMaxAndMinNumber fm = new FindMaxAndMinNumber();
-        int a[] = {1,2,5,7,9,6,5,4,2,58,4,-10};
+        int number = 10;
+        int a[] = new int[number];
+        for (int i = 0; i < number; i++) {
+            a[i] = (int) (Math.random() * number);
+        }
         fm.max = a[0];
         fm.min = a[0];
         fm.solve(a, 0, a.length - 1);
