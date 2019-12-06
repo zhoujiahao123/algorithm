@@ -61,7 +61,6 @@ class Solution {
         }else{
             max = root.val;
         }
-
         inOrder(root.right);
     }
     public class TreeNode {

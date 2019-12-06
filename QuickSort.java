@@ -4,7 +4,6 @@ package 研究生复试;
  * 即便是有序数组仍然要进行这么多次的递归。
  */
 public class QuickSort {
-
 	public static int divide(int a[] , int start,int end){
 		while(start<end){
 			int base = a[end];
@@ -28,8 +27,8 @@ public class QuickSort {
 	}
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
-		int a[] = {7,8,3,4,9,6,1,2,5};
-		sort(a,0,8);
+		int a[] = {200,1300,1250,3200};
+		sort(a,0,3);
 		for(int i = 0 ;i<a.length;i++){
 			System.out.print(a[i]+" ");
 		}
