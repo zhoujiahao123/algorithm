@@ -3,24 +3,26 @@ package algorithm.csp.que2019123;
 import java.util.*;
 
 public class Main {
-    static Map<Integer, Integer> map = new HashMap<>();
+    static Map<Integer, Integer> map;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int n = input.nextInt();
         boolean ans[] = new boolean[n];
         for (int i = 0; i < n; i++) {
+            map = new HashMap<>();
             String s = input.next();
             String left = s.split("=")[0];
             String right = s.split("=")[1];
-            String leftArray[] = left.split("\\+");
-            String rightArray[] = right.split("\\+");
-            Map<String, Integer> rightMap = getMap(rightArray);
+            String[] leftArray = left.split("\\+");
+            String[] rightArray = right.split("\\+");
             Map<String, Integer> leftMap = getMap(leftArray);
+            map.clear();
+            Map<String, Integer> rightMap = getMap(rightArray);
             ans[i] = judge(rightMap, leftMap);
         }
         for (int i = 0; i < n; i++) {
-            System.out.println(ans[i]?"Y":"N");
+            System.out.println(ans[i] ? "Y" : "N");
         }
     }
 
@@ -28,7 +30,10 @@ public class Main {
         for (Map.Entry<String, Integer> entry : leftMap.entrySet()) {
             if (!rightMap.containsKey(entry.getKey())) {
                 return false;
-            } else if (entry.getValue() != rightMap.get(entry.getKey())) {
+                //注意超过128的Integer不能用等号
+            } else if (!entry.getValue().equals(rightMap.get(entry.getKey()))) {
+                return false;
+            } else if (rightMap.size() != leftMap.size()) {
                 return false;
             }
         }
@@ -40,10 +45,16 @@ public class Main {
         for (int i = 0; i < array.length; i++) {
             int k = 1;
             //数字可能不是一位
-            if (array[i].charAt(0) >= 48 && array[i].charAt(0) <= 57) {
-                k = array[i].charAt(0) - 48;
-                array[i] = array[i].substring(1);
+            int count = 0;
+            if (array[i].charAt(count) >= 48 && array[i].charAt(count) <= 57) {
+                k = array[i].charAt(count) - 48;
+                count++;
+                while (array[i].length() - 1 != count && array[i].charAt(count) >= 48 && array[i].charAt(count) <= 57) {
+                    k = k * 10 + (array[i].charAt(count) - 48);
+                    count++;
+                }
             }
+            array[i] = array[i].substring(count);
             Map<String, Integer> map = compute(array[i], k);
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
                 if (rightMap.containsKey(entry.getKey())) {
@@ -59,6 +70,7 @@ public class Main {
     //k是系数
     private static Map compute(String str, int k) {
         str = getKuoHaoNum(str);
+        boolean isVisited[] = new boolean[map.size()+1];
         int count = 0;
         String pre = "";
         boolean isFirst = true;
@@ -69,16 +81,20 @@ public class Main {
                     //说明是大写字母
                     int num = maps.containsKey(pre) ? maps.get(pre) : 0;
                     if (!pre.equals("")) {
-                        maps.put(pre, (num + 1) * k);
+                        maps.put(pre, num + k);
                     }
                     pre = "";
                 }
                 if (str.charAt(i) >= 48 && str.charAt(i) <= 57) {
                     //说明是数字，但数字可能不止一位，要考虑到
                     int multiply = str.charAt(i) - 48;
+                    while (i != str.length() - 1 && str.charAt(i + 1) >= 48 && str.charAt(i + 1) <= 57) {
+                        i++;
+                        multiply = multiply * 10 + (str.charAt(i) - 48);
+                    }
                     int num = maps.containsKey(pre) ? maps.get(pre) : 0;
                     if (!pre.equals("")) {
-                        maps.put(pre, (num + multiply) * k);
+                        maps.put(pre, num + multiply * k);
                     }
                     pre = "";
                     if (i == str.length() - 1) {
@@ -90,21 +106,35 @@ public class Main {
                 if (str.charAt(i) == '(') {
                     int num = maps.containsKey(pre) ? maps.get(pre) : 0;
                     if (!pre.equals("")) {
-                        maps.put(pre, (num + 1) * k);
+                        maps.put(pre, num + k);
                     }
                     pre = "";
-                    k = k * map.get(++count);
+                    count++;
+                    while (count!=isVisited.length&&isVisited[count]) {
+                        count++;
+                    }
+                    k = k * map.get(count);
+
                 }
                 if (str.charAt(i) == ')') {
                     int num = maps.containsKey(pre) ? maps.get(pre) : 0;
                     if (!pre.equals("")) {
-                        maps.put(pre, (num + 1) * k);
+                        maps.put(pre, num + k);
                     }
                     pre = "";
-                    k = k / map.get(count--);
+                    k = k / map.get(count);
+                    isVisited[count] = true;
+                    count--;
+                    while (isVisited[count]) {
+                        count--;
+                    }
                 }
             } else {
                 isFirst = false;
+                if (str.charAt(i) == '(') {
+                    count++;
+                    k = k * map.get(count);
+                }
             }
             if (str.charAt(i) != '(' && str.charAt(i) != ')') {
                 pre = pre + str.charAt(i);
@@ -112,7 +142,7 @@ public class Main {
             if (i == str.length() - 1 && str.charAt(i) != ')') {
                 int num = maps.containsKey(pre) ? maps.get(pre) : 0;
                 if (!pre.equals("")) {
-                    maps.put(pre, (num + 1) * k);
+                    maps.put(pre, num + k);
                 }
             }
         }
@@ -135,7 +165,13 @@ public class Main {
                 if (i != str.length() - 1) {
                     //数字可能不止一位
                     if (str.charAt(i + 1) >= 48 && str.charAt(i + 1) <= 57) {
-                        map.put(cur, str.charAt(++i) - 48);
+                        i++;
+                        int count = str.charAt(i) - 48;
+                        while (i != str.length() - 1 && str.charAt(i + 1) >= 48 && str.charAt(i + 1) <= 57) {
+                            i++;
+                            count = count * 10 + (str.charAt(i) - 48);
+                        }
+                        map.put(cur, count);
                         str = str.substring(0, i) + str.substring(i + 1);
                         i--;
                     } else {
