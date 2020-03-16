@@ -6,9 +6,9 @@ public class Solution1 {
     int pos = -1;
 
     public static void main(String[] args) {
-        int pre[] = {1, 2};
-        int in[] = {1, 2};
-        new Solution1().buildTree(pre, in);
+        String s1 = "aaa";
+        String s2 = "aaa";
+        System.out.println(s1==s2);
     }
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {

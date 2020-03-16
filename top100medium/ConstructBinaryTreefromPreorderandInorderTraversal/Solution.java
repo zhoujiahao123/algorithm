@@ -14,7 +14,7 @@ public class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         if (preorder == null) return null;
         if (preorder.length == 0) return null;
-        return solve(preorder, inorder);
+        return null;
     }
 
     public TreeNode solve(int[] preorder, int[] inorder, int start, int end) {
