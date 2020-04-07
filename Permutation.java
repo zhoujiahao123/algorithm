@@ -3,6 +3,7 @@ package 研究生复试;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Permutation {
 
@@ -14,6 +15,7 @@ public class Permutation {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 		String s = sdf.format(d);
 		System.out.println(s);
+
 	}
 	public static void f(int k ,int a[]){
 		if(k == a.length-1){
