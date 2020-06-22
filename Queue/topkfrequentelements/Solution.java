@@ -24,11 +24,9 @@ public class Solution extends PriorityQueue<Solution.Status> {
         }
 
     }
-
     public void add(int id, int primary) {
         super.add(new Status(id, primary));
     }
-
     public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i : nums) {

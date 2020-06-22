@@ -25,6 +25,7 @@ public class PriorityQueueDemo {
         priorityQueue = new PriorityQueue<>(ints.size(), Collections.reverseOrder());
         priorityQueue.addAll(ints);
         printQueue(priorityQueue);
+        Set set = new HashSet();
     }
 
     public static void printQueue(Queue queue) {
