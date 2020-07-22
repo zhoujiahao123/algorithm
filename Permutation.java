@@ -9,13 +9,16 @@ public class Permutation {
 
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
-		Calendar c = Calendar.getInstance();
+		/*Calendar c = Calendar.getInstance();
 		c.set(1997,11,30);
 		Date d = c.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 		String s = sdf.format(d);
-		System.out.println(s);
-
+		System.out.println(s);*/
+		Integer i1 = 200;
+		Integer i2 = 200;
+		System.out.println(i1==i2);
+		System.out.println(i1.equals(i2));
 	}
 	public static void f(int k ,int a[]){
 		if(k == a.length-1){

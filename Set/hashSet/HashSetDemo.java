@@ -1,6 +1,7 @@
 package algorithm.Set.hashSet;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class HashSetDemo {
@@ -25,5 +26,10 @@ public class HashSetDemo {
         set3.add(jacob3);
         set3.add(jacob3);
         System.out.println("size : " + set3.size());
+        Iterator iterator = set2.iterator();
+        while (iterator.hasNext()){
+            System.out.print(iterator.next());
+        }
+
     }
 }

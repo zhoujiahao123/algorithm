@@ -1,16 +1,37 @@
 package 研究生复试;
 
-public class Test {
+import org.omg.PortableServer.LIFESPAN_POLICY_ID;
 
+import java.lang.reflect.Field;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.LockSupport;
+
+public class Test {
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
-		int a[] = {7,8,4,5,9,2,1,3,6};
-		int b[] = {0,1,2,3};
-		int c[] = {3,3,3};
-		combination(c,0,3,"");
+//		int a[] = {7,8,4,5,9,2,1,3,6};
+//		int b[] = {0,1,2,3};
+//		int c[] = {3,3,3};
+//		combination(c,0,3,"");
 //		quickSort(a,0,a.length-1);
 //		System.out.println(binarySearch(a,0,a.length-1,9));
 //		permutation(b,0);
+		double i1 = 1/3;
+		double i2 = 1/3;
+		System.out.println(i1 == i2);
+		String s1 = "123";
+		System.out.println(System.identityHashCode(s1));
+		s1 += "45";
+		System.out.println(System.identityHashCode(s1));
+		final char[] c = {'1','2','3'};
+		System.out.println(System.identityHashCode(c));
+		System.arraycopy(c,0,c,0,2);
+		System.out.println(System.identityHashCode(c));
+
+
+
 	}
 	/**
 	 * 选择排序
