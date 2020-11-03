@@ -2,10 +2,55 @@ package algorithm.DpQuestion.CoinChange;
 
 public class Solution {
     int dp[][];
+    class Interval {
+        private int number;
+        private int startTime;
+        private int endTime;
+        private int weight;
+
+        public Interval(int number, int startTime, int endTime, int weight) {
+            this.number = number;
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.weight = weight;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+        public void setNumber(int number) {
+            this.number = number;
+        }
+
+        public int getStartTime() {
+            return startTime;
+        }
+
+        public void setStartTime(int startTime) {
+            this.startTime = startTime;
+        }
+
+        public int getEndTime() {
+            return endTime;
+        }
+
+        public void setEndTime(int endTime) {
+            this.endTime = endTime;
+        }
+
+        public int getWeight() {
+            return weight;
+        }
+
+        public void setWeight(int weight) {
+            this.weight = weight;
+        }
+    }
 
     public static void main(String[] args) {
-        int coins[] = new int[]{2,5,10,1};
-        new Solution().coinChange(coins, 27);
+        int coins[] = new int[]{1,4,16,64};
+        System.out.println(new Solution().coinChange(coins, 824));
     }
 
     public int coinChange(int[] coins, int amount) {

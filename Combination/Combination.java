@@ -2,10 +2,9 @@ package Combination;
 
 //4 A 2B 2C 1D 1E 3F 能组成多少种5个字母的字符串
 public class Combination {
-
     public static void main(String[] args) {
         // TODO 自动生成的方法存根
-        int c[] = {3, 3,2};
+        int c[] = {4,2,2,1,1,3};
         long startTime=System.nanoTime();   //获取开始时间
         f(c, 0, 5, "");  //测试的代码段
         long endTime=System.nanoTime(); //获取结束时间
@@ -23,8 +22,6 @@ public class Combination {
         if (k == a.length) {
             return;
         }
-
-        //注意这里为什么是可以小于等于
         for (int i = 0; i <= a[k]; i++) {
             //当i等于0，意味着我不取当前的这个字母，让后面的去凑这个组合
             f(a, k + 1, n - i, s);
@@ -32,5 +29,4 @@ public class Combination {
             s += (char) (k + 'A');
         }
     }
-
 }

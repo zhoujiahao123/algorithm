@@ -1,6 +1,7 @@
 package algorithm.javatest.annotation;
 
 import java.lang.annotation.*;
+import java.util.Random;
 
 @Target(ElementType.TYPE)//表示该注解可以放在类上
 @Retention(RetentionPolicy.RUNTIME)//表示作用范围为运行时
@@ -12,6 +13,7 @@ import java.lang.annotation.*;
 }
 @AnnotationTest(id=1,description = "i am description")
 class Utils{
+
     public static void main(String[] args) {
         AnnotationTest annotationTest = Utils.class.getAnnotation(AnnotationTest.class);
         System.out.print(annotationTest.id()+" " + annotationTest.description());

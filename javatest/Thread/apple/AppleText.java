@@ -14,7 +14,6 @@ public class AppleText {
     public AppleText(AppleGenerator generator) {
         mGenerator = generator;
     }
-
     public static void main(String[] args) {
         exec  = Executors.newCachedThreadPool();
         new AppleText(new AppleGenerator(exec));
@@ -22,7 +21,6 @@ public class AppleText {
         exec.execute(new ThreadTwo());
         exec.execute(new ThreadThree());
     }
-
     static class ThreadOne implements Runnable {
         @Override
         public void run() {
@@ -34,7 +32,7 @@ public class AppleText {
                         }
                         int  i = mGenerator.next();
                         if(i>100) continue;
-                        System.out.println("线程1拿" + i);
+                        System.out.println("A");
                         if(mGenerator.count == 100){
                             exec.shutdownNow();
                         }else{
@@ -44,15 +42,10 @@ public class AppleText {
                 }
             } catch (InterruptedException e) {
                 System.out.println("InterruptedException1");
-                String s = "aaa";
-
             }finally {
-
-
             }
         }
     }
-
     static class ThreadTwo implements Runnable {
 
         @Override
@@ -65,7 +58,7 @@ public class AppleText {
                         }
                         int  i = mGenerator.next();
                         if(i>100) continue;
-                        System.out.println("线程2拿" + i);
+                        System.out.println("B");
                         if(mGenerator.count == 100){
                             exec.shutdownNow();
                         }else{
@@ -80,9 +73,7 @@ public class AppleText {
             }
         }
     }
-
     static class ThreadThree implements Runnable {
-
         @Override
         public void run() {
             try {
@@ -93,7 +84,7 @@ public class AppleText {
                         }
                         int  i = mGenerator.next();
                         if(i>100) continue;
-                        System.out.println("线程3拿" + i);
+                        System.out.println("C");
                         if(mGenerator.count == 100){
                             exec.shutdownNow();
                         }else{

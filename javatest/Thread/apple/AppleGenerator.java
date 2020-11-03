@@ -13,6 +13,5 @@ public class AppleGenerator {
 
     public int next() {
         return ++count;
-
     }
 }
