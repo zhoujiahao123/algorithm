@@ -14,13 +14,13 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        int[] arr = numberGenerator(100000, 100000);
+        int[] arr = numberGenerator(100000, 1000000);
         int[] newArr = Arrays.copyOf(arr, arr.length);
         long timeShellSort1 = System.currentTimeMillis();
         ShellSort.ShellSort(arr,arr.length);
         long timeShellSort2 = System.currentTimeMillis();
         long timeQuicklySort1 = System.currentTimeMillis();
-        Arrays.sort(newArr);
+        QuicklySort.sort(newArr);
         long timeQuicklySort2 = System.currentTimeMillis();
         System.err.println("the timeShellSort : " + (timeShellSort2 - timeShellSort1));
         System.err.println("the timeQuicklySort1 : " + (timeQuicklySort2 - timeQuicklySort1));
