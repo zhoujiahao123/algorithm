@@ -1,4 +1,7 @@
 package algorithm.javatest.annotation;
 
-public class MyAbstractClass {
+import algorithm.List.MyArrayList;
+
+public abstract class MyAbstractClass {
+    public MyAbstractClass(){}
 }

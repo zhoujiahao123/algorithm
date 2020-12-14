@@ -1,12 +1,15 @@
 package algorithm.Set.list;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class ArrayListTest {
     
         public static void main(String[] args) {
             ArrayList list = new ArrayList();
+
             //创建存放int类型的linkedList
             LinkedList<Integer> linkedList = new LinkedList<>();
             /************************** linkedList的基本操作 ************************/

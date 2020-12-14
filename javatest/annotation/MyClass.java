@@ -1,4 +1,9 @@
 package algorithm.javatest.annotation;
 
-public class MyClass {
+import algorithm.List.MyArrayList;
+
+public class MyClass extends MyArrayList {
+    public MyClass(){
+
+    }
 }

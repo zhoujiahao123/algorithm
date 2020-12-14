@@ -28,6 +28,9 @@ public class Test {
         long[] res1 = createInstance_01();
         boolean instance1 = res1[0] == 0;
         System.out.println("懒汉式非线程安全创建的对象唯一？ ：" + instance1 +"  所用时间："+res1[1]);
+        long[] res5 = createInstance_05();
+        boolean instance5 = res5[0] == 0;
+        System.out.println("CAS线程安全创建的对象唯一？ ：" + instance5 +"  所用时间："+res5[1]);
     }
 
     private static long[] createInstance_01() throws InterruptedException {
@@ -97,12 +100,32 @@ public class Test {
     private static long[] createInstance_04() throws InterruptedException {
         ExecutorService executors = Executors.newCachedThreadPool();
         long startTime = System.currentTimeMillis();
-        int N = 10000;
+        int N = 100000;
         final CountDownLatch countDownLatch = new CountDownLatch(N);
         final Set<String> set = new HashSet<>();
         for (int i = 0; i < N; i++) {
             executors.execute(() -> {
                 Singleton_04 instance = Singleton_04.getInstance();
+                set.add(instance.toString());
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
+        executors.shutdown();
+        long endTime = System.currentTimeMillis();
+        Object[] objects = set.toArray();
+        long singleton = objects.length == 1 ? 0L : -1L;
+        return new long[]{singleton, endTime - startTime};
+    }
+    private static long[] createInstance_05() throws InterruptedException {
+        ExecutorService executors = Executors.newCachedThreadPool();
+        long startTime = System.currentTimeMillis();
+        int N = 100000;
+        final CountDownLatch countDownLatch = new CountDownLatch(N);
+        final Set<String> set = new HashSet<>();
+        for (int i = 0; i < N; i++) {
+            executors.execute(() -> {
+                Singleton_05 instance = Singleton_05.getInstance();
                 set.add(instance.toString());
                 countDownLatch.countDown();
             });
