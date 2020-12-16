@@ -1,21 +1,23 @@
 package algorithm.sort;
 
+import java.util.Arrays;
+
 public class ShellSort {
 
-    public static void ShellSort(int array[], int length) {
-        int d = length / 2;   //设置希尔排序的增量
-        int i;
-        int j;
-        while (d >= 1) {
-            for (i = d; i < length; i++) {
-                j = i - d;
-                while (j >= 0 && array[j] < array[i]) {
-                    array[j + d] = array[j];
-                    j = j - d;
+    public static void shellSort1(int[] arr) {
+        int gap = arr.length / 2;
+        while (gap != 0) {
+            for (int i = gap; i < arr.length; i++) {
+                int j = i;
+                int temp = arr[j];
+                while (j - gap >= 0 && arr[j - gap] > temp) {
+                    arr[j] = arr[j - gap];
+                    j -= gap;
                 }
-                array[j + d] = array[i];
+                if (j != i) arr[j] = temp;
             }
-            d = d / 2;
+            gap /= 2;
         }
+        for(int i : arr) System.out.println(i);
     }
 }

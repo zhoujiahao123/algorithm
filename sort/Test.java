@@ -17,7 +17,7 @@ public class Test {
         int[] arr = numberGenerator(100000, 1000000);
         int[] newArr = Arrays.copyOf(arr, arr.length);
         long timeShellSort1 = System.currentTimeMillis();
-        ShellSort.ShellSort(arr,arr.length);
+        ShellSort.shellSort1(arr);
         long timeShellSort2 = System.currentTimeMillis();
         long timeQuicklySort1 = System.currentTimeMillis();
         QuicklySort.sort(newArr);
