@@ -20,6 +20,7 @@ public class AppleText {
         exec.execute(new ThreadOne());
         exec.execute(new ThreadTwo());
         exec.execute(new ThreadThree());
+        exec.shutdown();
     }
     static class ThreadOne implements Runnable {
         @Override
