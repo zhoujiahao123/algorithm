@@ -1,7 +1,6 @@
 package algorithm.findJob.bfs;
 
 import java.util.*;
-
 public class Main {
     static class Node {
         int x;
@@ -11,10 +10,8 @@ public class Main {
             this.y = y;
         }
     }
-
-    Map<Node, Node> parentMap = new HashMap<>();
+    Map<Node, Node> parentMap = new HashMap<Node,Node>();
     int[][] dis = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-
     public static void main(String[] args) {
         int[][] matrix = new int[5][5];
         Scanner input = new Scanner(System.in);
@@ -26,7 +23,7 @@ public class Main {
         Main instance = new Main();
         Node endNote = new Node(4, 4);
         instance.solve(matrix, 0, 0, endNote);
-        List<String> res = new ArrayList<>();
+        List<String> res = new ArrayList<String>();
         while (instance.parentMap.containsKey(endNote)) {
             res.add("(" + endNote.x + ", " + endNote.y + ")");
             endNote = instance.parentMap.get(endNote);
@@ -36,9 +33,8 @@ public class Main {
             System.out.println(res.get(i));
         }
     }
-
     public void solve(int[][] matrix, int x, int y, Node endNode) {
-        Deque<Node> queue = new LinkedList<>();
+        Deque<Node> queue = new LinkedList<Node>();
         queue.add(new Node(x, y));
         matrix[x][y] = 1;
         boolean cancel = false;

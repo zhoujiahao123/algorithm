@@ -7,19 +7,21 @@ public class mtques {
     String constantfirst = "FirstConstant";
     Integer integer = 20;
     public static void main(String[] args) {
-        int integer = 21;
-        Integer myInteger = 22;
-        String constantfirst = "test";
+        new mtques().functionone();
     }
-    void functionone(int param){
-        this.integer = param;
-        int integer = 23;
-        Integer myinteger = 24;
-        String constantfirst = "test";
-    }
-    mtques(String constantfirst){
-        this.constantfirst = constantfirst;
-        System.out.println(integer);
+    public void functionone(){
+        int i , s =0;
+        for(int k = 0;k<5;++k){
+            i = 1;
+            while(i<k){
+                do {
+                    i++;
+                    s++;
+
+                }while (i<k);
+            }
+        }
+        System.out.println(s);
     }
 }
 class Veyron{

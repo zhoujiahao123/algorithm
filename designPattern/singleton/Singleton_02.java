@@ -11,12 +11,11 @@ package algorithm.designPattern.singleton;
 public class Singleton_02 {
     private static Singleton_02 instance;
 
-    private Singleton_02() {
-    }
+    private Singleton_02(){
 
-    //枷锁之后每次只有一个线程能进入方法，导致大量的线程需要等待，性能不高
-    public synchronized static Singleton_02 getInstance() {
-        if (instance == null) {
+    }
+    public synchronized static Singleton_02 getInstance(){
+        if(instance == null){
             instance = new Singleton_02();
         }
         return instance;
