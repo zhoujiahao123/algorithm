@@ -18,6 +18,6 @@ public class User implements Runnable {
         for(int i = 0;i<books.size();++i){
             library.borrow(books.get(i),tag);
         }
-        System.out.println("Ïß³Ì"+tag+"½áÊø===================================================");
+        System.out.println("thread "+tag+" over===================================================");
     }
 }

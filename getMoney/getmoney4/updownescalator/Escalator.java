@@ -3,10 +3,10 @@ package algorithm.getMoney.getmoney4.updownescalator;
 import java.util.List;
 
 /**
- * 扶梯对象
+ * Escalator object
  */
 public class Escalator {
-    private volatile boolean status;//扶梯的运行状态，默认true为一楼到二楼；false为二楼到一楼
+    private volatile boolean status;//The running status of the escalator is from the first floor to the second floor by default; False means from the second floor to the first floor
     private static final Object lock = new Object();
     private volatile boolean onlyOneDirect = false;
 
@@ -15,7 +15,7 @@ public class Escalator {
     }
 
     /**
-     * 从一楼到二楼
+     * From the first floor to the second floor
      */
     public void upEscalator(List<User> users) {
         int index = 0;
@@ -27,7 +27,7 @@ public class Escalator {
                     }
                     int first = index;
                     for (int i = 0; i < 10; ++i) {
-                        System.out.println(users.get(index) + "正在进入扶梯");
+                        System.out.println(users.get(index) + " Entering the escalator");
                         index++;
                         if (index == users.size()) {
                             onlyOneDirect = true;
@@ -35,11 +35,11 @@ public class Escalator {
                         }
                     }
                     for (int i = 0; i < 10; ++i) {
-                        System.out.println(users.get(first) + "正在离开扶梯");
+                        System.out.println(users.get(first) + " Leaving the escalator");
                         first++;
                         if (first == index) break;
                     }
-                    System.out.println("扶梯方向即将改变，以便从2楼开始行驶");
+                    System.out.println("The direction of the escalator is about to be changed to start from the second floor");
                     status = false;
                     lock.notify();
                 }
@@ -47,7 +47,7 @@ public class Escalator {
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                System.out.println("一楼的人已经全部通过扶梯来到了二楼");
+                System.out.println("All the people on the first floor have come to the second floor by escalator");
             }
         }
     }
@@ -62,7 +62,7 @@ public class Escalator {
                     }
                     int first = index;
                     for (int i = 0; i < 10; ++i) {
-                        System.out.println(users.get(index) + "正在进入扶梯");
+                        System.out.println(users.get(index) + " Entering the escalator");
                         index++;
                         if (index == users.size()) {
                             onlyOneDirect = true;
@@ -70,18 +70,18 @@ public class Escalator {
                         }
                     }
                     for (int i = 0; i < 10; ++i) {
-                        System.out.println(users.get(first) + "正在离开扶梯");
+                        System.out.println(users.get(first) + " Leaving the escalator");
                         first++;
                         if (first == index) break;
                     }
-                    System.out.println("扶梯方向即将改变，以便从1楼开始行驶");
+                    System.out.println("The direction of the escalator is about to change to start from the first floor");
                     status = true;
                     lock.notify();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                System.out.println("二楼的人已经全部通过扶梯来到了一楼");
+                System.out.println("The people on the second floor have all come to the first floor through the escalator");
             }
         }
     }

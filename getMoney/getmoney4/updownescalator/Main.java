@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 public class Main {
     public static void main(String[] args) {
         ExecutorService threadPoll = Executors.newCachedThreadPool();
-        //随机生成100个用户，分布在商场两层
+        //Randomly generated 100 users, distributed in two floors of the mall
         Random random = new Random();
         int size = random.nextInt(100) + 1;
         List<User> _1FUsers = new ArrayList<>();
@@ -17,12 +17,12 @@ public class Main {
         int _1FIndex = 1;
         int _2FIndex = 1;
         for (int i = 1; i < size; ++i) {
-            User user = new User("第1楼的第" + _1FIndex + "个人");
+            User user = new User("Floor1 the " + _1FIndex + " people");
             _1FIndex++;
             _1FUsers.add(user);
         }
         for (int i = size; i <= 100; ++i) {
-            User user = new User("第2楼的第" + _2FIndex + "个人");
+            User user = new User("Floor2 the " + _2FIndex + " people");
             _2FIndex++;
             _2FUsers.add(user);
         }
